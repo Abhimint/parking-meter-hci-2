@@ -1,0 +1,144 @@
+<!-- Add icons to show what kind of activity would require how much time? -->
+<!-- Depending on what next stage is, button should be initially disabled and then enabled to show name of next stage? -->
+<!-- Change button disabled state? Improve it -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Time Selection</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap Materialize (Google Theme) -->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.min.css"></script>-->
+
+  <!-- Bootstrap Material Design -->
+  <!-- <link rel="stylesheet" type="text/css" href="material-design/css/bootstrap-material-design.css">
+  <link rel="stylesheet" type="text/css" href="material-design/css/ripples.min.css"> -->
+
+  <!-- Material Design fonts -->
+  <!-- <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons"> -->
+
+  <style>
+    .panel-body  {
+      word-break:break-all
+    }
+    .timeCost{
+      font-size: 20px;
+    }
+    .timeBtnAffordance{
+      background-color: grey;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <div class="row">
+    <div class="progress col-sm-4 col-sm-offset-4">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+          40% Complete (success)
+    </div>
+  </div>
+  <div class="col-sm-2 col-sm-offset-2">
+    <a href="payment.html" class="btn btn-primary btn-md disabled" id="nextBtn">Next <span class="glyphicon glyphicon-menu-right"></span></a>
+  </div>
+  </div>
+  <h2>Select Amount of Time</h2>
+  <div class="input" id="clock"></div>
+</div>
+  
+<div class="container">
+  <div class="row">
+    <!-- <div class="btn-lg.btn-block.btn-raised col-sm-4"> -->
+    <div class="btn btn-default col-sm-4 col-sm-offset-1 timeBtn">
+      <!-- <div class="panel-body"> -->
+        <div><h3>30 Minutes<br><br><span class="timeCost">$0.50</span></h3></div>
+      <!-- </div> -->
+    </div>
+    <div class="btn btn-default col-sm-4 col-sm-offset-2 timeBtn">
+      <!-- <div class="panel-body"> -->
+        <div><h3>1 Hour<br><br><span class="timeCost">$1.00</span></h3></div>
+      <!-- </div> -->
+    </div>
+  </div>
+  <div>&nbsp;</div>
+  <div class="row">
+    <div class="btn btn-default col-sm-4 col-sm-offset-1 timeBtn">
+      <!-- <div class="panel-body"> -->
+        <div><h3>2 Hours<br><br><span class="timeCost">$2.00</span></h3></div>
+      <!-- </div> -->
+    </div>
+    <div class="btn btn-default col-sm-4 col-sm-offset-2 timeBtn">
+      <!-- <div class="panel-body"> -->
+        <div><h3>3 Hours<br><br><span class="timeCost">$3.00</span></h3></div>
+      <!-- </div> -->
+    </div>
+  </div>
+  <div>&nbsp;</div>
+  <div class="row">
+    <div class="btn btn-default col-sm-4 col-sm-offset-4 timeBtn">
+      <!-- <div class="panel-body"> -->
+        <div><h3>All Day<br><br><span class="timeCost">$6.00</span></h3></div>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+  <script>
+    function updateClock ( ){
+      var currentTime = new Date ( );
+        var currentHours = currentTime.getHours ( );
+        var currentMinutes = currentTime.getMinutes ( );
+        var currentSeconds = currentTime.getSeconds ( );
+
+        // Pad the minutes and seconds with leading zeros, if required
+        currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+        currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+        // Choose either "AM" or "PM" as appropriate
+        var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+
+        // Convert the hours component to 12-hour format if needed
+        currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+        // Convert an hours component of "0" to "12"
+        currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+        // Compose the string for display
+        var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+        
+        
+        $("#clock").html(currentTimeString);
+            
+     }
+
+    $(document).ready(function()
+    {
+       setInterval('updateClock()', 1000);
+    });
+
+    $(".timeBtn").click(function() {
+      $(".timeBtn").removeClass("disabled timeBtnAffordance");
+      $(this).addClass("disabled timeBtnAffordance");
+      $("#nextBtn").removeClass("disabled");
+    });
+
+
+  </script>
+
+</body>
+</html>
+
